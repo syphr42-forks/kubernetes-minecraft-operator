@@ -120,9 +120,11 @@ func configMapData(spec minecraftv1alpha1.MinecraftServerSpec) (map[string]strin
 		}
 		minorVersion := strconv.Itoa(int(version.Major)) + "." + strconv.Itoa(int(version.Minor))
 		d, err := json.Marshal(struct {
+			Type    string                          `json:"type"`
 			Version string                          `json:"version"`
 			Packs   minecraftv1alpha1.VanillaTweaks `json:"packs"`
 		}{
+			Type: "datapacks",
 			Version: minorVersion,
 			Packs:   *spec.VanillaTweaks,
 		})
